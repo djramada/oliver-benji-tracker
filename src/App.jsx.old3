@@ -30,9 +30,7 @@ try {
     throw new Error('Entorno local detectado');
   }
 } catch (e) {
-  // --- ¡ATENCIÓN! ---
-  // ASEGÚRATE DE QUE AQUÍ ESTÁN TUS DATOS REALES DE FIREBASE.
-  // SI PONE "TU_API_KEY_AQUI", EL LOGIN NO FUNCIONARÁ.
+  // --- PON AQUÍ TUS DATOS REALES DE FIREBASE ---
   firebaseConfig = {
     apiKey: "AIzaSyCZR6KXJTdgmUM3XsfLtfZEjCJMXKSnr6w", 
     authDomain: "oliver-benji-tracker-db.firebaseapp.com",
@@ -77,15 +75,8 @@ export default function App() {
 
   const loginWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
-    try { 
-      await signInWithPopup(auth, provider); 
-    } catch (error) { 
-      console.error("Error al iniciar sesión:", error);
-      // Muestra el error exacto para ayudar a depurar
-      // Si dice "auth/unauthorized-domain", es que falta añadir el dominio en Firebase
-      // Si dice "auth/invalid-api-key", es que no has puesto tus claves en el código
-      alert(`Error al conectar con Google:\n${error.code}\n${error.message}`); 
-    }
+    try { await signInWithPopup(auth, provider); } 
+    catch (error) { alert("Error al iniciar sesión. Revisa la consola."); }
   };
 
   const logout = async () => {
